@@ -1,16 +1,18 @@
 const config = require('config');
 const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth20');
+const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 //getting the google client id and secret id
-const clientID = config.get('googleClientID');
-const clinetSecret = config.get('googleClientSecret');
+const client_ID = config.get('googleClientID');
+const clinet_Secret = config.get('googleClientSecret');
 
 passport.use(new GoogleStrategy({
     // options for google-oauth
-    callbackURL: '/auth/google/redirect',
-    clientID: clientID,
-    clinetSecret: clinetSecret
-}, () => {
+    callbackURL: 'http://localhost:5000/auth/google/redirect',
+    clientID: client_ID,
+    clientSecret: clinet_Secret
+}, (accessToken, refreshToken, profile, done) => {
     // callback function for google-oauth
+    console.log('callback function fired.');
+    console.log(profile);
 }));
