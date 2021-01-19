@@ -1,7 +1,13 @@
 exports.login = (req, res, next) => {
-    res.render('login');
+    const user = req.user;
+    if(user){
+        res.redirect('/');
+    }else{
+        res.render('login');
+    }
 };
 
 exports.logout = (req, res, next) => {
-    res.send('You have successfully logged out.');
+    req.logout();
+    res.redirect('/auth/login');
 };

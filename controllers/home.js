@@ -1,3 +1,4 @@
 exports.homepage = (req, res, next) => {
-    res.render('home');
+    const user = req.user;
+    res.render('home', { user});
 }
